@@ -1,0 +1,17 @@
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+    </head>
+
+<body class="container">
+ <% if ((typeof data !== 'undefined') && data !== null) { %>
+ <p>Sorry, this is not the page you are looking for :( </p>
+  <div class="alert alert-error"><%=data%></div>
+  <% } %>
+  
+  <footer>
+    <% include ../partials/footer %>
+    </footer>
+    
+</body>
+</html>

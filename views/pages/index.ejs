@@ -1,0 +1,44 @@
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+    </head>
+
+<body class="container">
+
+    <% if ((typeof msg !== 'undefined') && msg !== null) { %>
+    <div class="alert alert-warning"><%=msg%></div>
+    <% } %>
+    
+    <script>
+        var intervalListener = null;
+        var clr = function(){
+         $('#msg').fadeOut(function(){
+          $('#msg').html("").show();
+         })
+         }
+         
+         var log = function(t){
+          intervalListener = clearInterval(intervalListener)
+          $('#cat_msg').prepend(t+"<br>");
+          intervalListener = setInterval(clr, 3000);
+         }
+</script>
+<div id="msg" style="background-color: lavender"></div>
+
+        <div class="jumbotron">
+            <h2>ML</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col col-md-3">Home</div>
+            <div class="col col-md-3">Train</div>
+            <div class="col col-md-3">Data</div>
+            <div class="col col-md-3">Log Out</div>
+        </div>
+
+        <footer>
+            <br><br>
+            <% include ../partials/footer %>
+        </footer>
+</body>
+</html>

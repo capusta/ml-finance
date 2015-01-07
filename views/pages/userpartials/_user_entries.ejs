@@ -1,0 +1,109 @@
+<% var fieldlist = ["latitude", "longitude", "date", "temp", "amount", "description"]; %>
+
+<div id="user_data">
+ <h3 style="text-align: center">Data Entries</h3>
+ <p style="text-align: center">Input entries manually or <a href='/data/entries/view'>view</a> them</p>
+ <p> </p>
+ <div id="entry_msg" style="background-color: lavender"></div>
+ 
+ <div class="row row-centered" id="entryInfo">
+  <form class="form-horizontal" id="sform">
+   <fieldset>
+    
+    <% fieldlist.forEach(function(f){ %>
+     <div class="form-group">
+     <label class="control-label col-centered" for="<%= f %>"></label>
+     <div class="col-xs-9 col-md-4 input-group col-centered">
+      <input id="<%= f %>" name="<%= f %>" class="form-control " placeholder="" type="text">
+      <span class="input-group-addon"><%= f %></span>
+    </div>
+    </div>
+    <% }) %>
+    
+    <div class="form-group">
+     <label class="sr-only control-label" for="category">Category</label>
+     <div class="col-md-4 col-xs-9 input-group col-centered">
+      <select id="category" name="category" class="input-xlarge form-control">
+       <% categories.forEach(function(val){ %>
+        <option value="<%= val[0]%>"><%= val[1] %></option>
+      <% }) %>
+    </select>
+    <span class="input-group-addon">Category</span>
+  </div>
+</div>
+   </fieldset>
+   <div class="col-md-4 col-centered">
+   <button type="submit" id="entrySubmit" class="btn btn-primary btn-block" value="submit">Submit</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<br>
+<div id="entrylist">
+  <% if (typeof dataitems !== 'undefined' && dataitems !== []){ %>
+  <script>
+   $('#sform').hide();
+  </script>
+   <% dataitems.forEach(function(e){ %>
+    <div class="row">
+     <%= e.amount %>
+     <%= e.description %>
+     <%= e.category %>
+    </div>
+    
+   <% }) %>
+  <% } %>
+</div>
+ 
+ 
+<script>
+$(document).ready(function(){
+var infodiv = $('#entryInfo')
+var alldata = {}
+function positionError(e){
+ log("no position data available" + e);
+};
+function positionSuccess(pos){
+ 
+ $('#latitude').val(pos.coords.latitude);
+ $('#longitude').val(pos.coords.longitude);
+ var d = new Date(pos.timestamp);
+ $('#date').val(d);
+ var url = "https://api.forecast.io/forecast/a693235492de9e1806ef2ea9e25dc814/" + pos.coords.latitude + "," + pos.coords.longitude
+ $.ajax({
+  type: "GET",
+  dataType: "jsonp",
+  url: url,
+ }).done(function(data){
+  if(data.currently && data.currently.temperature){
+   $('#temp').val(data.currently.temperature);
+  }
+ })
+}
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true })
+
+var postsuccess = function(){
+ $('#sform').fadeOut();
+}
+
+$('#sform').submit(function( event ){
+ event.preventDefault();
+ var formdata = $(this).serialize()
+
+ $.ajax({
+  type: "POST",
+  url: '/data/entries',
+  data: formdata,
+  success: postsuccess()
+ })
+ .done(function(res){
+  if(res.msg){
+   log(res.msg);
+  }
+ });
+ 
+});
+})
+
+</script>

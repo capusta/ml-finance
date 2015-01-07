@@ -1,0 +1,80 @@
+<div id="user_categories" class="row">
+ <div class="input-group">
+  <span class="input-group-btn">
+   <button class="btn btn-success" type="button" id="add_category">Add</button>
+  </span>
+  <input type="text" class="form-control" id="description">
+ </div>
+</div>
+<br>
+
+<div id="categoryList">
+ <% if (categories == null || categories == []){ %>
+        You do not have any categories defined
+        <% } else { %>
+        <br>
+        <% categories.map(function(c){ %>
+        <div class="row" id="row<%=c.id%>">
+          <div class="col-xs-2">
+           <%= c.label %> 
+          </div>
+          <div class="col-xs-6">
+           <a href=#><span class="glyphicon glyphicon-minus" aria-hidden="true" id="c<%=c.id%>"></span></a>
+          </div>
+          <br>
+          <br>
+         </div>
+         
+         <script>
+         //TODO: make nice tiles or something with flexbox
+          $('#c<%=c.id%>').click(function(){
+           console.log("removing "+ <%= c.id %>)
+           var data = {id: <%= c.id %>};
+           var url = '/data/categories/delete/<%=c.id%>';
+           var posting = $.post(url,data);
+           posting.done(function(data){
+            if (data.msg){
+             log(data.msg)
+            }
+           }).fail(function(){
+            log('failure')
+           })
+           $('#row<%=c.id%>').fadeOut();
+          })
+         </script>
+         <% }) %>
+        <% } %>
+</div>
+ 
+<script>
+$( document ).ready(function(){
+ 
+ var d = $('#description');
+ $('#add_category').click(function(){
+  
+  if(d.val() === null || d.val().trim() === null || d.val().trim() === "" ){
+   log("Sorry, the value must not be empty");
+   return;
+   }
+   
+  $.ajax({
+   type: "POST",
+   url: '/data/categories',
+   data: {description: d.val().trim() },
+   success: d.val(null)
+  })
+  .done(function(r){
+   if(r.label && r.success){
+    $('#categoryList').prepend(r.label + "<br>");
+    log(r.msg);
+   } else {
+    log(r.msg)
+   }
+   })
+ })
+})
+var categoryDiv = $('#user_categories')
+var categList = $('#categoryList')
+
+
+</script>

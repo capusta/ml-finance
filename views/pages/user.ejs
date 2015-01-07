@@ -1,0 +1,49 @@
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+    </head>
+<body class="container">
+
+<% if ((typeof msg !== 'undefined') && msg.length > 0) { %>
+    <p> <%= msg %> </p>
+    <% } %>
+    <div id="msg" style="background-color: lavender"></div>
+     <script>
+        var intervalListener = null;
+        var clr = function(){
+         $('#msg').fadeOut(function(){
+          $('#msg').html("").show();
+         })
+         }
+         
+         var log = function(t){
+          intervalListener = clearInterval(intervalListener)
+          $('#msg').prepend(t+"<br>");
+          intervalListener = setInterval(clr, 3000);
+         }
+</script>
+
+    
+<% if (typeof userid === 'undefined' || userid === null) { %>
+    <% include userpartials/_user_none %>
+    <% } else { %>
+        <% include userpartials/_user_exist %>
+        <br>
+        <br>
+        <% if ((typeof style !== 'undefined') && style === 'data') { %>
+            <% include userpartials/_user_data %>
+            <% } %>
+        <% if ((typeof style !== 'undefined') && style === 'dataitems') { %>
+            <% include userpartials/_user_entries %>
+            <% } %>
+            
+        <% if ((typeof style !== 'undefined') && style === 'categories') { %>
+            <% include userpartials/_user_categ %>
+            <% } %>
+    <% } %>
+     
+ <footer>
+     <% include ../partials/footer %>
+ </footer>
+</body>
+</html>    

@@ -1,0 +1,31 @@
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+    </head>
+    
+<body class="container">
+    <script type="text/javascript" src="/js/convnet-min.js"></script>
+    <script type="text/javascript" src="/js/training.js"></script>
+            <div class="jumbotron">
+                <h2>ML</h2>
+            </div>
+            <div class="row">
+                <p>Training model for: <%= userid %></div></p> 
+                <br>
+                <div id="content"></div>
+            </div>
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+        <script>
+            $(document).ready(function(){
+                if((typeof <%- categories %> !== 'undefined') && (<%- categories %> !== [])){
+                    
+                 training.start(<%- categories %>, <%- dataitems %>, 4);   
+                } else {
+                    $('#content').html("Oops .. .can't train because we do not have the training labels ");
+                }
+            });
+        </script>
+    </body>
+</html>
