@@ -19,9 +19,9 @@ app.set('views', path.resolve((__dirname, 'views')));
 app.set('view engine', 'ejs');
 
 
-app.use(bodyParser.urlencoded({extended: false, limit: '300kb'}));
+app.use(bodyParser.urlencoded({extended: false, limit: '400kb'}));
 app.use(bodyParser.json({limit: '300kb'}));
-app.use(bodyParser.text({limit: '300kb'}));
+// app.use(bodyParser.text({limit: '300kb'}));
 
 require('./router')(app);
 

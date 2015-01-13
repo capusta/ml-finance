@@ -84,7 +84,7 @@ function positionSuccess(pos){
 navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true })
 
 var postsuccess = function(){
- $('#sform').fadeOut();
+ $('#sform').hide();
 }
 
 $('#sform').submit(function( event ){

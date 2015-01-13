@@ -20,10 +20,11 @@
         <script>
             $(document).ready(function(){
                 if((typeof <%- categories %> !== 'undefined') && (<%- categories %> !== [])){
-                    
+                    console.log(<%- categories %>)
                  training.start(<%- categories %>, <%- dataitems %>, 4);   
                 } else {
                     $('#content').html("Oops .. .can't train because we do not have the training labels ");
+                    log("oops dude ")
                 }
             });
         </script>

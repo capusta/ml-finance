@@ -29,29 +29,34 @@ module.exports = function(app){
     
     app.post('/data/entries', md.checkuser, function(req, res) {
         if((typeof req.body.category == 'undefined' || req.body.category === null)){
-            res.json({success: false, msg: "Sorry, please specify category "});
-            return;
+            return res.json({success: false, msg: "Sorry, please specify category "});
         }
         req.user.getCategories({where: 'id = ' + req.body.category})
         .complete(function(err, cat){
             if(err || cat === []){
-                res.json({success: false, msg: "Unable to process request "});
-                return;
+                return res.json({success: false, msg: "Unable to process request "});
             }
-            global.db.Dataitem.create({lat: req.body.latitude, lon: req.body.longitude, temp: req.body.temp, date: req.body.date,
-            amount: req.body.amount, description: req.body.description})
+            global.db.Dataitem.create({
+                lat: req.body.latitude, 
+                lon: req.body.longitude, 
+                temp: req.body.temp, 
+                date: req.body.date,
+                amount: req.body.amount, 
+                description: req.body.description
+                //TODO: add calculation for days since last entry
+                })
             .complete(function(err, d){
                 if(err){
-                    res.json({success: false, msg: "Unable to create the item - please make sure all field are filled in "});
-                    return;
+                    console.log(err);
+                    return res.json({success: false, msg: "Unable to create the item - please make sure all field are filled in "});
                 }
                 cat[0].addDataitem(d)
                 .then(function(){
-                    res.json({success: true, msg: "Item added"});
+                    return res.json({success: true, msg: "Item added"});
                 })
                 .catch(function(err){
                     console.log("Unable to add data item for some reason ");
-                    res.json({success: false, msg: "Error when adding the item "})
+                    return res.json({success: false, msg: "Error when adding the item "})
                 });
             });
         });

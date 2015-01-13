@@ -24,8 +24,9 @@ module.exports = function(app){
             if(err) {
                res.render('pages/user', {userid: null, msg: "OOPS, could not get all the items"});
                }
-               res.render('pages/train', {userid: req.session.userid, dataitems: JSON.stringify(dataitems),
-                                          categories:  JSON.stringify(ctgHash)});
+               res.render('pages/train', {  userid: req.session.userid, 
+                                            dataitems: JSON.stringify(dataitems),
+                                            categories:  JSON.stringify(ctgHash)});
            });
     });
     
@@ -36,7 +37,7 @@ module.exports = function(app){
            if(err) {
                console.log(err);
            }
-           res.json({success: true, msg: "Model saved on server"});
+           return res.json({success: true, msg: "Model saved on server"});
        });
     });
     

@@ -7,6 +7,8 @@ module.exports = function(sequelize, DataTypes){
                 len:[1,140]
             }
         },
+        numItems: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0},
+        lastEntry: {type: DataTypes.DATE, allowNull: true},
         hash: {type: DataTypes.INTEGER, allowNull: true, defaltValue: 0}
     });
 };

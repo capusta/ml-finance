@@ -1,58 +1,43 @@
 <html>
+  <% include ../partials/head %>
   <head>
-    <!--Load the AJAX API-->
+     
+     
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="/js/convnet-min.js"></script>
     <script type="text/javascript">
-    
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
+      var predict = {};
+      predict.start = function(dataitems, model){
+        var magicNet = new convnetjs.MagicNet([],[])
+        console.log("before "); console.log(magicNet)
+        magicNet.fromJSON(model)
+        console.log("after"); console.log(magicNet)
+        console.log("model"); console.log(model.nets[2])
+        
+        var some_test_vol = new convnetjs.Vol([35.646796, 139.710276, 53.5, 12, 12, 14, 30]);
+        var predicted_label_soft = magicNet.predict_soft(some_test_vol);
+        var predicted_label = magicNet.predict(some_test_vol);   
+        console.log("predicting label " + predicted_label)
+        console.log("categories shoudl be ")
+        console.log(model.customCategories)
+        // console.log("final: " + categories[net_train_labels[predicted_label]] + " / " + JSON.stringify(predicted_label_soft));
+      }
       
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table, 
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-      // Create the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Topping');
-      data.addColumn('number', 'Slices');
-      var dataRows = [];
-       if (typeof [<%- dataitems %>] !== 'undefined' && [<%- dataitems %>] !== []){
-       <%- dataitems %>.forEach(function(e){
-           console.log(e)
-       dataRows.push([e.category, e.amount]); 
-       }) 
-       } 
-       console.log(dataRows)
-      data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1], 
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
-
-      // Set chart options
-      var options = {'title':'How Much Pizza I Ate Last Night',
-                     'width':400,
-                     'height':300};
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-
-    }
     </script>
   </head>
 
   <body>
 <!--Div that will hold the pie chart-->
     <div id="chart_div" style="width:400; height:300"></div>
-
-  
-
+    <script>
+  $(document).ready(function(){
+    if ((typeof <%- dataitems %> !== 'undefined') && (typeof <%- model %> !== 'undefined') &&
+        (JSON.stringify(<%- dataitems %> !== []))){
+      predict.start(<%- dataitems %>, <%- model %>)
+    } else {
+      log("Unable to start training ... please add some expenses ");
+    }
+  });
+  </script>
   </body>
 </html>

@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes){
         date: {type: DataTypes.DATE, allowNull: false, defaultValue: Sequelize.NOW},
         
         amount: {type: DataTypes.FLOAT, allowNull: false, defaltValue: 0},
-        description: {type: DataTypes.STRING, allowNull: true, defaltValue: ""}
+        description: {type: DataTypes.STRING, allowNull: true, defaltValue: ""},
+        daysSinceLast: {type: DataTypes.INTEGER, allowNull: true, defaltValue: 0}
     });
 };
