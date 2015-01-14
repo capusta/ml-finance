@@ -7,33 +7,35 @@
     <script type="text/javascript" src="/js/convnet-min.js"></script>
     <script type="text/javascript">
       var predict = {};
-      predict.start = function(dataitems, model){
-        var magicNet = new convnetjs.MagicNet([],[])
-        console.log("before "); console.log(magicNet)
-        magicNet.fromJSON(model)
-        console.log("after"); console.log(magicNet)
-        console.log("model"); console.log(model.nets[2])
-        
-        var some_test_vol = new convnetjs.Vol([35.646796, 139.710276, 53.5, 12, 12, 14, 30]);
+      predict.start = function(model){
+        var magicNet = new convnetjs.MagicNet();
+        magicNet.fromJSON(model);
+        // see if we can predict the same model that we trained for 
+        var some_test_vol = new convnetjs.Vol([35.646796, 145.710276, 43.5, 0, 1, 12, 14, 30]);
         var predicted_label_soft = magicNet.predict_soft(some_test_vol);
         var predicted_label = magicNet.predict(some_test_vol);   
-        console.log("predicting label " + predicted_label)
-        console.log("categories shoudl be ")
-        console.log(model.customCategories)
+        
+        predict.log("categories: " + JSON.stringify(model.labelCategories));
+        predict.log("predicting label " + model.labelCategories[predicted_label]);
+        predict.log("actual values " + JSON.stringify(predicted_label_soft.w));
         // console.log("final: " + categories[net_train_labels[predicted_label]] + " / " + JSON.stringify(predicted_label_soft));
+      }
+      
+      predict.log = function(t){
+        $('#content').append(t + "<br>");
       }
       
     </script>
   </head>
 
   <body>
-<!--Div that will hold the pie chart-->
+
     <div id="chart_div" style="width:400; height:300"></div>
+    <div id="content"></div>
     <script>
   $(document).ready(function(){
-    if ((typeof <%- dataitems %> !== 'undefined') && (typeof <%- model %> !== 'undefined') &&
-        (JSON.stringify(<%- dataitems %> !== []))){
-      predict.start(<%- dataitems %>, <%- model %>)
+    if (typeof <%- model %> !== 'undefined'){
+      predict.start(<%- model %>);
     } else {
       log("Unable to start training ... please add some expenses ");
     }

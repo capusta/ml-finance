@@ -11,7 +11,7 @@ var datadir = process.env.DATA_DIR;
 
 module.exports = function(app){
     
-    app.get('/predict', md.checkuser, md.findcategoryObjects, md.findEntries, function (req, res) {
+    app.get('/predict', md.checkuser, function (req, res) {
         var path = datadir+"/"+req.user.id+".model";
         fs.exists(path, function(exists){
             if(exists){
@@ -20,9 +20,7 @@ module.exports = function(app){
                         console.log("unable to read model file ... " + path);
                         return res.json({success: false, msg: "Unable to read model files"});
                     }
-                    return res.render('pages/predict', {dataitems: JSON.stringify(req.items), 
-                                                        categories: JSON.stringify(req.categories),
-                                                        model: JSON.stringify(obj)});
+                    return res.render('pages/predict', { model: JSON.stringify(obj)});
                 });
                 
             } else {
