@@ -7,16 +7,23 @@ var async = require('async');
 module.exports = function(app){
     
     app.get('/train', md.checkuser, md.findcategoryObjects, function (req, res) {
-        var ctgHash = {};
-        req.categories.forEach(function(c){
-            ctgHash[c.id] = c.label;
-        });
-        var dataitems = [];
+        var trainingData = [];
+        var index = 0;
+        
         var getDataItems = function(category, callback){
-               category.getDataitems().complete(function(err, di){
+            var localIndex = index;
+            index++;
+            trainingData[localIndex] = {};
+            trainingData[localIndex].categoryID = category.id;
+            trainingData[localIndex].categoryLabel = category.label;
+            
+            var dataitems = [];
+            category.getDataitems().complete(function(err, di){
                    di.forEach(function(i){
-                       dataitems.push(i);
+                       //IMPORTANT: note the data order 
+                       dataitems.push({lat: i.lat, lon: i.lon, temp: i.temp, date: i.date, daysSinceLast: i.daysSinceLast});
                    });
+                   trainingData[localIndex].data = dataitems;
                    callback(null, di.length);
                });
            };
@@ -24,14 +31,12 @@ module.exports = function(app){
             if(err) {
                res.render('pages/user', {userid: null, msg: "OOPS, could not get all the items"});
                }
-               res.render('pages/train', {  userid: req.session.userid, 
-                                            dataitems: JSON.stringify(dataitems),
-                                            categories:  JSON.stringify(ctgHash)});
+              res.render('pages/train', {  userid: req.session.userid, trainingData:  JSON.stringify(trainingData)});
            });
     });
     
       app.post('/train', md.checkuser, function(req, res){
-       console.log('training model for ' + req.session.userid);
+       console.log('posting model for ' + req.session.userid);
        var file = datadir+"/"+req.session.userid+'.model';
        jf.writeFile(file, req.body, function(err){
            if(err) {

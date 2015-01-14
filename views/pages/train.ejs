@@ -19,9 +19,9 @@
         </footer>
         <script>
             $(document).ready(function(){
-                if((typeof <%- categories %> !== 'undefined') && (<%- categories %> !== [])){
-                    console.log(<%- categories %>)
-                 training.start(<%- categories %>, <%- dataitems %>, 4);   
+                if((typeof <%- trainingData %> !== 'undefined') && (<%- trainingData %> !== [])){
+                //  console.log("xxx\n" + JSON.stringify(<%- trainingData %>)) + "\n";
+                 training.start(<%- trainingData %>, 3);   
                 } else {
                     $('#content').html("Oops .. .can't train because we do not have the training labels ");
                     log("oops dude ")

@@ -12,3 +12,5 @@ module.exports = function(sequelize, DataTypes){
         hash: {type: DataTypes.INTEGER, allowNull: true, defaltValue: 0}
     });
 };
+
+//TODO: create an instance method to update the last entry
