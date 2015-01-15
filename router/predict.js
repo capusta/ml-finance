@@ -2,17 +2,11 @@ console.log("--loading prediction routes");
 var md = require('./middleware'), 
     fs = require("fs"),
     jf = require("jsonfile");
-    
-var datadir = process.env.DATA_DIR;
-
-
-// var jf = require('jsonfile');
-// var async = require('async');
 
 module.exports = function(app){
     
     app.get('/predict', md.checkuser, function (req, res) {
-        var path = datadir+"/"+req.user.id+".model";
+        var path = req.user.dataDirectory+"/"+req.user.id+".model";
         fs.exists(path, function(exists){
             if(exists){
                 jf.readFile(path, function(err, obj){

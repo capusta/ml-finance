@@ -19,12 +19,17 @@ module.exports = function(sequelize, DataTypes){
                 .then(function(u){
                     if (u === null){
                         console.log("looks like user " + new_id + " is ok ");
-                        next(null, new_id)
+                        next(null, new_id);
                     } else {
                         global.db.User.generateID();
                     }
                       
                 });
+            }
+        },
+        instanceMethods: {
+            dataDirectory: function(){
+                return process.env.DATA_DIR || 'data';
             }
         }
     });
@@ -42,3 +47,5 @@ function pickRandom () {
     // return result.join('');
     return crypto.randomBytes(20).toString('hex');
 }
+
+//TODO: INSTANCE METHOD THAT GETS ALL THE CATEGORIES

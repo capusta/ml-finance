@@ -50,6 +50,7 @@ module.exports = function(app){
                     console.log(err);
                     return res.json({success: false, msg: "Unable to create the item - please make sure all field are filled in "});
                 }
+                cat[0].updateCategory();
                 cat[0].addDataitem(d)
                 //TODO: add calculation for days since last entry
                 .then(function(){

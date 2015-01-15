@@ -1,6 +1,5 @@
 console.log("--loading training routes");
 var md = require('./middleware');
-var datadir = process.env.DATA_DIR;
 var jf = require('jsonfile');
 var async = require('async');
 
@@ -19,8 +18,10 @@ module.exports = function(app){
             
             var dataitems = [];
             category.getDataitems().complete(function(err, di){
+                if(err){ 
+                    return res.render('pages/user', {userid: req.session.userid, msg: "unable to process request "}); 
+                }
                    di.forEach(function(i){
-                       //IMPORTANT: note the data order 
                        dataitems.push({lat: i.lat, lon: i.lon, temp: i.temp, date: i.date, daysSinceLast: i.daysSinceLast});
                    });
                    trainingData[localIndex].data = dataitems;
@@ -29,15 +30,15 @@ module.exports = function(app){
            };
         async.map(req.categories, getDataItems, function(err, results){
             if(err) {
-               res.render('pages/user', {userid: null, msg: "OOPS, could not get all the items"});
-               }
-              res.render('pages/train', {  userid: req.session.userid, trainingData:  JSON.stringify(trainingData)});
+                return res.render('pages/user', {userid: null, msg: "OOPS, could not get all the data items"});
+            }
+                return res.render('pages/train', {  userid: req.session.userid, trainingData:  JSON.stringify(trainingData)});
            });
     });
     
       app.post('/train', md.checkuser, function(req, res){
        console.log('posting model for ' + req.session.userid);
-       var file = datadir+"/"+req.session.userid+'.model';
+       var file = req.user.dataDirectory+"/"+req.session.userid+'.model';
        jf.writeFile(file, req.body, function(err){
            if(err) {
                console.log(err);

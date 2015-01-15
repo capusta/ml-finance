@@ -1,8 +1,6 @@
 <html>
   <% include ../partials/head %>
   <head>
-     
-     
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="/js/convnet-min.js"></script>
     <script type="text/javascript">
@@ -18,7 +16,6 @@
         predict.log("categories: " + JSON.stringify(model.labelCategories));
         predict.log("predicting label " + model.labelCategories[predicted_label]);
         predict.log("actual values " + JSON.stringify(predicted_label_soft.w));
-        // console.log("final: " + categories[net_train_labels[predicted_label]] + " / " + JSON.stringify(predicted_label_soft));
       }
       
       predict.log = function(t){

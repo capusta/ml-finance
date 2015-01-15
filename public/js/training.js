@@ -32,6 +32,10 @@ training.start = function(traindata, iterations){
     
     console.log("Size of training data: " + net_train_data.length);
     console.log("Size of training labels: " + net_train_labels.length);
+    if (net_train_data.length < 5){
+        training.log("sorry, you need some more training data");
+        return null;
+    }
     // console.log("Training data: \n");
     // console.log(JSON.stringify(net_train_data));
     console.log("Labels: " + JSON.stringify(net_train_labels));
