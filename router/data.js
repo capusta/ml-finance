@@ -32,11 +32,20 @@ module.exports = function(app){
         if((typeof req.body.category == 'undefined' || req.body.category === null)){
             return res.json({success: false, msg: "Sorry, please specify category "});
         }
+        if (!validator.isInt(req.body.category)){
+            return res.json({success: false, msg: "Invalid cateogry"});
+        }
         req.user.getCategories({where: 'id = ' + req.body.category})
-        .complete(function(err, cat){
-            if(err || cat === []){
+        .then(function(cat){
+            
+            // This was interesting.  Apparently, sequelize JS will 'find' a record in the database which does not 
+            // exist, and return an empty array instad of follwoing 'function(err, record)' format.
+            // The sure way to find an 'error' is to check that the first element of array does not exist
+            
+            if(cat === [] || cat === null || typeof(cat[0]) === 'undefined'){
                 return res.json({success: false, msg: "Unable to process request "});
             }
+            console.log("Cateogries " + JSON.stringify(cat[0]));
             global.db.Dataitem.create({
                 lat: req.body.latitude, 
                 lon: req.body.longitude, 
@@ -44,7 +53,6 @@ module.exports = function(app){
                 date: req.body.date,
                 amount: req.body.amount, 
                 description: req.body.description
-                
                 })
             .complete(function(err, d){
                 if(err){
@@ -67,7 +75,6 @@ module.exports = function(app){
     
     app.post('/data/categories', md.checkuser, function(req, res){
        var desc = req.body.description;
-       console.log("length of description : " + desc.length);
        global.db.Category.create({label: desc})
        .complete(function(err, c){
           if(err){
