@@ -58,7 +58,7 @@ module.exports = function(app){
                 })
                 .catch(function(err){
                     console.log("Unable to add data item for some reason ");
-                    return res.json({success: false, msg: "Error when adding the item "})
+                    return res.json({success: false, msg: "Error when adding the item "});
                 });
             });
         });
@@ -66,12 +66,11 @@ module.exports = function(app){
     
     app.post('/data/categories', md.checkuser, function(req, res){
        var desc = req.body.description;
-       //TODO: sanitize some string data coming from the body of the request
        console.log("length of description : " + desc.length);
        global.db.Category.create({label: desc})
        .complete(function(err, c){
           if(err){
-              res.json({success: false, msg: "Sorry, unable to add.  140 char max, Alphanumeric"});
+              res.json({success: false, msg: "Sorry, category must be letter+number combination, and less than 140 characters"});
           } else {
               req.user.addCategory(c).complete(function(err, next){
               if (err){
@@ -92,7 +91,7 @@ module.exports = function(app){
                   res.json({success: true, msg: "Category " + c[0].label + " removed "});  
                 })
             } else {
-                res.json({success: false, msg: "Error occured when removing category " + c.label})        ;
+                res.json({success: false, msg: "Error occured when removing category"})        ;
             }
         });
         

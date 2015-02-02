@@ -38,7 +38,7 @@ module.exports = function(app){
     
       app.post('/train', md.checkuser, function(req, res){
        console.log('posting model for ' + req.session.userid);
-       var file = req.user.dataDirectory+"/"+req.session.userid+'.model';
+       var file = req.user.dataDirectory()+"/"+req.session.userid+'.model';
        jf.writeFile(file, req.body, function(err){
            if(err) {
                console.log(err);
