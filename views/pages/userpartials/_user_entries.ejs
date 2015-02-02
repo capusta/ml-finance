@@ -70,6 +70,7 @@ function positionSuccess(pos){
  
  $('#latitude').val(pos.coords.latitude);
  $('#longitude').val(pos.coords.longitude);
+ //TODO: possibly remove the date
  var d = new Date(pos.timestamp);
  $('#date').val(d);
  var url = "https://api.forecast.io/forecast/a693235492de9e1806ef2ea9e25dc814/" + pos.coords.latitude + "," + pos.coords.longitude

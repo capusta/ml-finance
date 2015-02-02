@@ -50,7 +50,6 @@ module.exports = function(app){
                 lat: req.body.latitude, 
                 lon: req.body.longitude, 
                 temp: req.body.temp, 
-                date: req.body.date,
                 amount: req.body.amount, 
                 description: req.body.description
                 })
@@ -59,9 +58,10 @@ module.exports = function(app){
                     console.log(err);
                     return res.json({success: false, msg: "Unable to create the item - please make sure all field are filled in "});
                 }
+                
+                d.setDaysSinceLast(cat[0].lastEntry);
                 cat[0].updateCategory();
                 cat[0].addDataitem(d)
-                //TODO: add calculation for days since last entry
                 .then(function(){
                     return res.json({success: true, msg: "Item added"});
                 })
