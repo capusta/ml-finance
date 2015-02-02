@@ -1,6 +1,7 @@
 console.log("--loading data routes");
 var md = require('./middleware');
 var async = require("async");
+var validator = require("validator")
 
 var errorOut = function(res, msg){
     res.json({success: false, msg: msg});
@@ -84,14 +85,16 @@ module.exports = function(app){
     
     app.post('/data/categories/delete/:id', md.checkuser, function(req, res){
         var cat_id = req.params['id'];
-        //TODO: sanitize for an integer
+        if(!validator.isInt(cat_id)){
+            return res.json({success: false, msg: "Sorry, invalid category"});
+        }
         req.user.getCategories({where: 'id = ' + cat_id}).success(function(c){
             if(c && c != [] && c[0]){
                 c[0].destroy().success(function(){
                   res.json({success: true, msg: "Category " + c[0].label + " removed "});  
-                })
+                });
             } else {
-                res.json({success: false, msg: "Error occured when removing category"})        ;
+                res.json({success: false, msg: "Error occured when removing category"});
             }
         });
         
