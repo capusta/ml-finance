@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes){
         id: {type: DataTypes.STRING, allowNull: false, unique: true},
         email: {type: DataTypes.STRING, defaultValue: "user@mailinator.com"},
         catID: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0}
-        // Don't really need that last one !!!
+        // Don't really need that last one !!!!
     },
     {
         classMethods: {
