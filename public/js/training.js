@@ -30,16 +30,16 @@ training.start = function(traindata, iterations){
         });
     });
     
-    console.log("Size of training data: " + net_train_data.length);
-    console.log("Size of training labels: " + net_train_labels.length);
+    // console.log("Size of training data: " + net_train_data.length);
+    // console.log("Size of training labels: " + net_train_labels.length);
     if (net_train_data.length < 5){
         training.log("sorry, you need some more training data");
         return null;
     }
     // console.log("Training data: \n");
     // console.log(JSON.stringify(net_train_data));
-    console.log("Labels: " + JSON.stringify(net_train_labels));
-    console.log("Readable Labels" + JSON.stringify(trainingCategories));
+    // console.log("Labels: " + JSON.stringify(net_train_labels));
+    // console.log("Readable Labels" + JSON.stringify(trainingCategories));
     
     var magicNet = new convnetjs.MagicNet(net_train_data, net_train_labels, opts);
     magicNet.onFinishBatch(finishedBatch);
@@ -47,7 +47,6 @@ training.start = function(traindata, iterations){
         
     function finishedBatch() {
         training.log("training batch complete - iteration " + training.iterations);
-        var some_test_vol = new convnetjs.Vol([35.646796, 145.710276, 43.5, 0, 1, 12, 14, 30]);
         
          var predicted_label_soft = magicNet.predict_soft(some_test_vol);
         // console.log("predicting soft label: " + JSON.stringify(predicted_label_soft))

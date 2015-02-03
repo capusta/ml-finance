@@ -1,8 +1,10 @@
 <html>
   <% include ../partials/head %>
+  
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="/js/convnet-min.js"></script>
+    
     <script type="text/javascript">
       var predict = {};
       predict.start = function(model){
@@ -26,7 +28,7 @@
   </head>
 
   <body>
-
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.min.css">
     <div id="chart_div" style="width:400; height:300"></div>
     <div id="content"></div>
     <script>
