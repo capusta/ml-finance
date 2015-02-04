@@ -48,16 +48,16 @@ training.start = function(traindata, iterations){
     function finishedBatch() {
         training.log("training batch complete - iteration " + training.iterations);
         
-         var predicted_label_soft = magicNet.predict_soft(some_test_vol);
+         // var predicted_label_soft = magicNet.predict_soft(some_test_vol);
         // console.log("predicting soft label: " + JSON.stringify(predicted_label_soft))
-        console.log("predicting label #" + magicNet.predict(some_test_vol)); 
+       // console.log("predicting label #" + magicNet.predict(some_test_vol)); 
         
         // training.log("training: " + predicted_label + " / " + JSON.stringify(predicted_label_soft));
             
         if (training.iterations === 0) {
-            var predicted_label = magicNet.predict(some_test_vol);               
-            predicted_label_soft = magicNet.predict_soft(some_test_vol);
-            training.log("final: " + traindata[predicted_label].categoryLabel + " / " + JSON.stringify(predicted_label_soft));
+            // var predicted_label = magicNet.predict(some_test_vol);               
+            // predicted_label_soft = magicNet.predict_soft(some_test_vol);
+            // training.log("final: " + traindata[predicted_label].categoryLabel + " / " + JSON.stringify(predicted_label_soft));
             clearInterval(intvl);
             training.log("... posting model ... please wait ...");
             var modelData = magicNet.toJSON();
