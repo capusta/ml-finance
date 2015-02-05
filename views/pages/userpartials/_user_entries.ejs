@@ -47,12 +47,14 @@
   </script>
    <% dataitems.forEach(function(e){ %>
     <div class="row">
-     <div class="col col-xs-1 hidden-xs"><%= e.lat %></div>
-     <div class="col col-xs-1 hidden-xs"><%= e.lon %></div>
-     <div class="col col-xs-4 hidden-xs"><%= e.date %></div>
-     <div class="col col-xs-4 col-md-2"><%= e.amount %></div>
-     <div class="col col-xs-4 col-md-2"><%= e.description %></div>
-     <div class="col col-xs-4 col-md-2"><%= e.category %></div>
+    
+     <div class="col col-xs-2 col-md-1 hidden-xs"><%= e.lat %></div>
+     <div class="col col-xs-2 col-md-1 hidden-xs"><%= e.lon %></div>
+     <div class="col col-xs-2 col-md-1 hidden-xs"><%= (e.date.getMonth())+1 %>/ <%= e.date.getDay() %></div>
+     <div class="col col-xs-2 col-md-1"><%= e.amount %></div>
+     <div class="col col-xs-2 col-md-3 "><%= e.description %></div>
+     <div class="col col-xs-2 col-md-2"><%= e.category %></div>
+     <br>
     </div>
     
    <% }) %>
