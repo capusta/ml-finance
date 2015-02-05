@@ -4,36 +4,7 @@
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="/js/convnet-min.js"></script>
-    
-    <script type="text/javascript">
-      var predict = {};
-      predict.positionSuccess = function(){
-        
-      }
-      predict.positionError = function(){
-        
-      }
-      predict.start = function(model){
-        var magicNet = new convnetjs.MagicNet();
-        magicNet.fromJSON(model);
-        // see if we can predict the same model that we trained for 
-         var some_test_vol = new convnetjs.Vol([35.646796, 145.710276, 43.5, 0, 1, 12, 14, 30]);
-        
-        navigator.geolocation.getCurrentPosition(predict.positionSuccess, predict.positionError, { enableHighAccuracy: true })
-        
-        var predicted_label_soft = magicNet.predict_soft(some_test_vol);
-        var predicted_label = magicNet.predict(some_test_vol);   
-        
-        // predict.log("categories: " + JSON.stringify(model.labelCategories));
-        predict.log("predicting label" + "<br>" + model.labelCategories[predicted_label]);
-        // predict.log("actual values " + JSON.stringify(predicted_label_soft.w));
-      }
-      
-      predict.log = function(t){
-        $('#content').append(t + "<br>");
-      }
-      
-    </script>
+    <script type="text/javascript" src="/js/predict.js"></script>
   </head>
 
   <body>
@@ -50,7 +21,7 @@
     if (typeof <%- model %> !== 'undefined'){
       predict.start(<%- model %>);
     } else {
-      log("Unable to start training ... please add some expenses ");
+      predict.log("Unable to start training ... please add some expenses ");
     }
   });
   </script>

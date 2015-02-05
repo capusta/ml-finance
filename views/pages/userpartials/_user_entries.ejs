@@ -47,11 +47,12 @@
   </script>
    <% dataitems.forEach(function(e){ %>
     <div class="row">
-     <%= e.lat %>
-     <%= e.lon %>
-     <%= e.amount %>
-     <%= e.description %>
-     <%= e.category %>
+     <div class="col col-xs-1 hidden-xs"><%= e.lat %></div>
+     <div class="col col-xs-1 hidden-xs"><%= e.lon %></div>
+     <div class="col col-xs-4 hidden-xs"><%= e.date %></div>
+     <div class="col col-xs-4 col-md-2"><%= e.amount %></div>
+     <div class="col col-xs-4 col-md-2"><%= e.description %></div>
+     <div class="col col-xs-4 col-md-2"><%= e.category %></div>
     </div>
     
    <% }) %>
@@ -70,9 +71,10 @@ function positionSuccess(pos){
  
  $('#latitude').val(pos.coords.latitude);
  $('#longitude').val(pos.coords.longitude);
- //TODO: possibly remove the date
- var d = new Date(pos.timestamp);
+ //TODO: possibly remove the date and make this automatic
+ var d = new Date(pos.timestamp).toUTCString();
  $('#date').val(d);
+ // TODO: consolidate code for predict.js
  var url = "https://api.forecast.io/forecast/a693235492de9e1806ef2ea9e25dc814/" + pos.coords.latitude + "," + pos.coords.longitude
  $.ajax({
   type: "GET",

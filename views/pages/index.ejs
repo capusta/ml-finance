@@ -18,27 +18,20 @@
          }
          
          var log = function(t){
-          intervalListener = clearInterval(intervalListener)
-          $('#cat_msg').prepend(t+"<br>");
-          intervalListener = setInterval(clr, 3000);
+            intervalListener = clearInterval(intervalListener)
+            $('#cat_msg').prepend(t+"<br>");
+            intervalListener = setInterval(clr, 3000);
          }
-</script>
-<div id="msg" style="background-color: lavender"></div>
+    </script>
+    
+    <div id="msg" style="background-color: lavender"></div>
+    <div class="jumbotron">
+        <h2>Expense Sense</h2>
+    </div>
 
-        <div class="jumbotron">
-            <h2>ML</h2>
-        </div>
-        
-        <div class="row">
-            <div class="col col-xs-3">Home</div>
-            <div class="col col-xs-3">Train</div>
-            <div class="col col-xs-3">Data</div>
-            <div class="col col-xs-3">Log Out</div>
-        </div>
-
-        <footer>
-            <br><br>
-            <% include ../partials/footer %>
-        </footer>
+    <footer>
+        <br><br>
+        <% include ../partials/footer %>
+    </footer>
 </body>
 </html>

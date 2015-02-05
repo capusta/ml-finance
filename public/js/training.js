@@ -20,9 +20,13 @@ training.start = function(traindata, iterations){
         trainingCategories.push(item.categoryLabel);
         item.data.forEach(function(dataItem){
             net_train_labels.push(index);
+            // all dates in the database should be UTC format 
             var date = new Date(dataItem.date);
             net_train_data.push(new convnetjs.Vol([
-                dataItem.lat, dataItem.lon, dataItem.temp, dataItem.daysSinceLast,
+                dataItem.lat, 
+                dataItem.lon, 
+                dataItem.temp, 
+                dataItem.daysSinceLast,
                 date.getMonth()+1, 
                 date.getDay(), 
                 date.getHours(), 
@@ -46,11 +50,11 @@ training.start = function(traindata, iterations){
     var intvl = setInterval(function(){magicNet.step()}, 0);
         
     function finishedBatch() {
-        training.log("training batch complete - iteration " + training.iterations);
+        training.log("Iteration " + training.iterations + " of " +  training.iterations);
         
          // var predicted_label_soft = magicNet.predict_soft(some_test_vol);
-        // console.log("predicting soft label: " + JSON.stringify(predicted_label_soft))
-       // console.log("predicting label #" + magicNet.predict(some_test_vol)); 
+        //console.log("predicting soft label: " + JSON.stringify(predicted_label_soft))
+        //console.log("predicting label #" + magicNet.predict(some_test_vol)); 
         
         // training.log("training: " + predicted_label + " / " + JSON.stringify(predicted_label_soft));
             
@@ -59,7 +63,7 @@ training.start = function(traindata, iterations){
             // predicted_label_soft = magicNet.predict_soft(some_test_vol);
             // training.log("final: " + traindata[predicted_label].categoryLabel + " / " + JSON.stringify(predicted_label_soft));
             clearInterval(intvl);
-            training.log("... posting model ... please wait ...");
+            training.log("... posting model ... <br> please wait ...");
             var modelData = magicNet.toJSON();
             modelData.labelCategories = trainingCategories;
             $.ajax({
