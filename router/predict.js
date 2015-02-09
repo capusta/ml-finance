@@ -9,16 +9,16 @@ module.exports = function(app){
         var path = req.user.dataDirectory()+"/"+req.user.id+".model";
         fs.exists(path, function(exists){
             if(exists){
-                jf.readFile(path, function(err, obj){
+                jf.readFile(path, function(err, m){
                     if(err){
-                        console.log("unable to read model file ... " + path);
-                        return res.json({success: false, msg: "Unable to read model files"});
+                        return res.json({success: false, msg: "Unable to read model files ... <br>" +
+                        " perhaps train model one more time ?"});
                     }
-                    return res.render('pages/predict', { model: JSON.stringify(obj)});
+                    return res.render('pages/predict', { model: JSON.stringify(m)});
                 });
                 
             } else {
-                return res.render('pages/user', {userid: null, msg: "OOPS, you need to first train a model before you can use it"});
+                return res.render('pages/user', {userid: req.user.id, msg: "OOPS, you need to first train a model before you can use it"});
             }
         });
     });
