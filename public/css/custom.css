@@ -25,3 +25,25 @@ body {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.flex-container {
+    display: flex;
+    
+    display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+  
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style: none;
+    font-family: Ubuntu;
+}
+
+.flex-item {
+    flex-grow: 1;
+    background-color: azure;
+    margin: 4px;
+    text-align: center;
+}
