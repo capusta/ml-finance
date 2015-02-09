@@ -11,7 +11,8 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   key: 'ML',
-  secure: true
+  secure: true,
+  httpOnly: true
 }));
 
 app.use(express.static(path.resolve(__dirname, 'public')));
@@ -21,7 +22,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: false, limit: '400kb'}));
 app.use(bodyParser.json({limit: '300kb'}));
-// app.use(bodyParser.text({limit: '300kb'}));
 
 require('./router')(app);
 
@@ -33,7 +33,7 @@ http.createServer(app).listen(app.get('port'), app.get('addr'), function(){
   console.log("starting database services");
   require('./models');
   global.db.sequelize.sync().catch(function(err){
-    console.log('db synchronization failed');
+    console.log('db synchronization failed ' + err);
   }).then(function(){
     console.log('db synchronization succeeded');
   });

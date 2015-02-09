@@ -24,6 +24,7 @@ module.exports = function(sequelize, DataTypes){
                     return err;
                 }
                 diffDays = Math.round(Math.abs((d1.getTime() - d2.getTime()))/oneDay);
+                if(diffDays > 365) {diffDays = 0}
                 this.updateAttributes({daysSinceLast: diffDays}, {fields: ['daysSinceLast']});
             }
         }
