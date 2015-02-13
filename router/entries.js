@@ -1,7 +1,7 @@
-console.log("--loading data routes");
+console.log("--loading entries routes");
 var md = require('./middleware');
 var async = require("async");
-var validator = require("validator")
+var validator = require("validator");
 
 var errorOut = function(res, msg){
     res.json({success: false, msg: msg});
@@ -67,7 +67,7 @@ module.exports = function(app){
                 })
                 .catch(function(err){
                     console.log("Unable to add data item for some reason ");
-                    return res.json({success: false, msg: "Error when adding the item "});
+                    return res.json({success: false, msg: "Error when adding the item "+ err});
                 });
             });
         });

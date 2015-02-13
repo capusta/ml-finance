@@ -30,6 +30,9 @@ module.exports = function(sequelize, DataTypes){
         instanceMethods: {
             dataDirectory: function(){
                 return process.env.DATA_DIR || 'data';
+            },
+            getDataItems: function(){
+                //TODO: write this function
             }
         }
     });
@@ -39,4 +42,4 @@ function pickRandom () {
     return crypto.randomBytes(20).toString('hex');
 }
 
-//TODO: INSTANCE METHOD THAT GETS ALL THE CATEGORIES
+//TODO: INSTANCE METHOD THAT GETS ALL THE ENTRIES

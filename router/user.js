@@ -1,4 +1,5 @@
 console.log("--loading user routes");
+var md = require('./middleware');
 
 module.exports = function(app){
     app.get('/user/logout', function(req, res){
@@ -9,6 +10,10 @@ module.exports = function(app){
                res.render('pages/user', {userid: null, msg: "successfully logged out"});
            }
         });
+    });
+    
+    app.get('/data', md.checkuser, function (req, res) {
+        res.render('pages/user', {userid: req.session.userid, style: 'data'});
     });
     
     app.post('/user/new', function(req, res){
