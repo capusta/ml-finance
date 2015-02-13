@@ -18,7 +18,7 @@ module.exports = function(app){
                 });
                 
             } else {
-                return res.render('pages/user', {userid: req.user.id, msg: "OOPS, you need to first train a model before you can use it"});
+                return res.render('pages/user', {userid: req.session.userid, msg: "OOPS, you need to first train a model before you can use it"});
             }
         });
     });

@@ -1,17 +1,28 @@
 
-<ul class="flex-nav">
+<ul class="flex-nav" id="nav_header">
 	<li><a href="/">
 		<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
 		</li>
 	<li><a href="/train">
 			<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Train</a>
 		</li>
-	<li><a href="/data">
-		<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Data</a>
+	<li><a href="/data" id="data">
+		<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Data</a>
 		</li>
+		<% if (!(typeof userid === 'undefined' || userid === null)) { %>
+			<li><a href="/data/categories"> 
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Categories</a>
+			</li>
+			
+			<li><a href="/data/entries"> 
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Entries</a>
+			</li>
+		<% } %>
+		
 	<li><a href="/predict">
 			<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Predict</a>
 			</li>
-	<li><a href="/user/logout">Log Out</a></li>
+	<li><a href="/user/logout">
+		<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
 </ul>
 <br>

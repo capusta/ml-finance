@@ -24,7 +24,7 @@ module.exports = function(app){
         });        
     });
     
-    app.get('/data/entries', md.checkuser, md.finduserAndCategories, function(req, res) {
+    app.get('/data/entries', md.checkuser, md.getCategories, function(req, res) {
         res.render('pages/user', {userid: req.user.id, style: "dataitems", categories: req.categories});    
     });
     
