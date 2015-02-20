@@ -16,5 +16,9 @@
     "mysql": "^2.5.3",
     "sequelize": "^2.0.0-rc2",
     "validator": "^3.28.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.1.0"
   }
 }

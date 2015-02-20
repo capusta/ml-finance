@@ -23,7 +23,7 @@ module.exports = function(app){
         nU.generateID(function(err, new_id){
             if(err){
                 console.log("unable to create user: " + err);
-                res.json({msg: "Seems like there is an error: " + err});
+                res.json({msg: "Seems like there is an error generating random IDs: " + err});
             } else {
                 nU.create({id: new_id})
                 .then(function(u){
@@ -38,6 +38,8 @@ module.exports = function(app){
     });
     
     app.get('/user/:userid', function(req, res){
+        //TODO: sanitize the userid param to a string
+        
         global.db.User.find({where: {id: req.param('userid')}})
         .then(function(u){
             if (u){

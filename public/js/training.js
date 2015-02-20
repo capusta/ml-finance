@@ -9,7 +9,9 @@ training.log = function(text){
 training.start = function(traindata, iterations){
     training.iterations = iterations || 3;
     var opts = {};
-    //opts.num_epochs = 20;
+    opts.num_epochs = 20;
+    opts.num_folds = 2; 
+    opts.num_candidates = 50;
         
     training.log("building sample data, please wait");
     var net_train_data = [];

@@ -12,11 +12,11 @@ predict.log = function(t){
 predict.start = function(model){
     predict.model = model;
     // var some_test_vol = new convnetjs.Vol([35.646796, 139.710276, 36, 1, 1, 12, 14, 30]);
-    navigator.geolocation.getCurrentPosition(predict.keepgoing, predict.positionError, { enableHighAccuracy: true });
+    navigator.geolocation.getCurrentPosition(predict.positionSuccess, predict.positionError, { enableHighAccuracy: true });
     };
       
 // callback if we get successfull position lock and we have access to 'pos' variable
-predict.keepgoing = function(pos){
+predict.positionSuccess = function(pos){
     predict.data.push(pos.coords.latitude);
     predict.log("Latitude: " + pos.coords.latitude);
     predict.data.push(pos.coords.longitude);
