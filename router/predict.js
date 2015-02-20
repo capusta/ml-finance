@@ -14,7 +14,7 @@ module.exports = function(app){
                         return res.json({success: false, msg: "Unable to read model files ... <br>" +
                         " perhaps train model one more time ?"});
                     }
-                    return res.render('pages/predict', { model: JSON.stringify(m)});
+                    return res.render('pages/predict', {userid: req.session.userid, model: JSON.stringify(m)});
                 });
                 
             } else {

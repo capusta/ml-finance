@@ -9,9 +9,7 @@ var errorOut = function(res, msg){
 };
 
 module.exports = function(app){
-    app.get('/data', md.checkuser, function (req, res) {
-        res.render('pages/user', {userid: req.session.userid, style: 'data'});
-    });
+    
     
     app.get('/data/entries/view', md.checkuser, md.findcategoryObjects, md.findEntries, function(req, res){
         //we need sequelize objects instead of a simple array
