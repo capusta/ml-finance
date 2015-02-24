@@ -15,7 +15,7 @@ global.db = {
     Dataitem: sq.import(__dirname + '/dataItem')
 };
 
-global.db.User.hasMany(global.db.Category, {as: "Categories", onDelete: 'CASCADE'});
+global.db.User.hasMany(global.db.Category, {as: "Categories", onDelete: 'cascade'});
 global.db.Category.hasMany(global.db.Dataitem, {as: "Dataitems", onDelete: 'CASCADE'});
 global.db.Category.belongsTo(global.db.User);
 global.db.Dataitem.belongsTo(global.db.Category);
