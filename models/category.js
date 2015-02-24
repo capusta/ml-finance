@@ -38,5 +38,16 @@ module.exports = function(sequelize, DataTypes) {
                 this.updateAttributes({lastEntry: Sequelize.fn("NOW")}, {fields: ['lastEntry']});
             }
         }
+    }, {
+     hooks: {
+        beforeDestroy: function(cat, options, callback) {
+        cat.getDataItems().then(function(items){
+            items.forEach(function(i){
+               i.destroy(); 
+            });
+            callback(null, cat);
+        });
+        }
+     }
     });
 };

@@ -34,7 +34,18 @@ module.exports = function(sequelize, DataTypes){
             getDataItems: function(){
                 //TODO: write this function
             }
+        },
+     hooks: {
+        beforeDestroy: function(usr, options, callback) {
+        usr.getCategories().then(function(cs){
+            console.log("user cateogires " + cs)
+            cs.forEach(function(i){
+                i.destroy();
+            });
+            callback(null, usr);
+        });
         }
+     }
     });
 };
 
