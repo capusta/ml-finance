@@ -5,7 +5,9 @@
   "main": "server.js",
   "repository": "",
   "author": "Capusta",
-  "scripts": { "test": "./node_modules/mocha/bin/_mocha | ./node_modules/coveralls/bin/coveralls.js"},
+  "scripts": {
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
   "dependencies": {
     "async": "^0.9.0",
     "body-parser": "^1.10.0",
@@ -15,7 +17,6 @@
     "express-session": "^1.9.2",
     "forecast.io": "0.0.9",
     "jsonfile": "^2.0.0",
-    "mocha-lcov-reporter": "0.0.1",
     "mysql": "^2.5.3",
     "sequelize": "^2.0.0-rc2",
     "validator": "^3.28.0"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.6",
+    "istanbul-coveralls": "^1.0.1",
     "mocha": "^2.1.0"
   }
 }
