@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for models/user.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">models/user.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">45% <small>(9 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">40% <small>(4 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">45% <small>(9 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">models/</a> &#187; user.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var crypto = require("crypto");
+&nbsp;
+module.exports = function(sequelize, DataTypes){
+    return sequelize.define("User", {
+        id: {type: DataTypes.STRING, allowNull: false, unique: true},
+        email: {type: DataTypes.STRING, defaultValue: "user@mailinator.com"},
+        catID: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0}
+    },
+    {
+        classMethods: {
+            generateID: <span class="fstat-no" title="function not covered" >function(next){</span>
+<span class="cstat-no" title="statement not covered" >                var new_id = pickRandom();</span>
+<span class="cstat-no" title="statement not covered" >                console.log("generating new id:" + new_id);</span>
+<span class="cstat-no" title="statement not covered" >                global.db.User.find({where: {id: new_id}})</span>
+                .catch(<span class="fstat-no" title="function not covered" >function(err){</span>
+<span class="cstat-no" title="statement not covered" >                    console.log('error in generating new user ID in the model ' + err);</span>
+<span class="cstat-no" title="statement not covered" >                    next(err, null);</span>
+                })
+                .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >                    if (u === null){</span>
+<span class="cstat-no" title="statement not covered" >                        console.log("looks like user " + new_id + " is ok ");</span>
+<span class="cstat-no" title="statement not covered" >                        next(null, new_id);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        global.db.User.generateID();</span>
+                    }
+                      
+                });
+            }
+        },
+        instanceMethods: {
+            dataDirectory: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >                return process.env.DATA_DIR || 'data';</span>
+            },
+            getDataItems: <span class="fstat-no" title="function not covered" >function(){</span>
+                //TODO: write this function
+            }
+        },
+     hooks: {
+        beforeDestroy: function(usr, options, callback) {
+        usr.getCategories().then(function(cs){
+            console.log("user cateogires " + cs)
+            cs.forEach(function(i){
+                i.destroy();
+            });
+            callback(null, usr);
+        });
+        }
+     }
+    });
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function pickRandom () {</span>
+<span class="cstat-no" title="statement not covered" >    return crypto.randomBytes(20).toString('hex');</span>
+}
+&nbsp;
+//TODO: INSTANCE METHOD THAT GETS ALL THE ENTRIES</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 25 2015 05:22:32 GMT+0000 (UTC)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>
