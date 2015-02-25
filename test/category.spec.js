@@ -1,7 +1,7 @@
 var expect = require("expect.js");
 require('../models/index.js');
 var id = 'notRandomID';
-
+global.db.sequelize.sync();
 //the after / before hooks do not seem to work here ... more on that later
 
 describe('categoryModel', function(){
