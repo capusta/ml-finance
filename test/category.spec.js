@@ -1,12 +1,18 @@
 var expect = require("expect.js");
 require('../models/index.js');
 var id = 'notRandomID';
-global.db.sequelize.sync();
+
 //the after / before hooks do not seem to work here ... more on that later
 
 describe('categoryModel', function(){
     var userModel = global.db.User;
     var newCat;
+    it('should sync the database ', function(done){
+        //TODO: move this to a separate test
+        global.db.sequelize.sync().then(function(){
+            done();
+        });        
+    });
     
     it('should create category', function(done){
         global.db.Category.create({label: "test"}).then(function(cat){
