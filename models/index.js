@@ -1,5 +1,5 @@
 var Sequelize = require("sequelize");
-var user = process.env.HGUSER || process.env.OPENSHIFT_MYSQL_DB_USERNAME;
+var user = process.env.HGUSER || process.env.OPENSHIFT_MYSQL_DB_USERNAME || "travis";
 var dbname = process.env.OPENSHIFT_APP_NAME || 'c9';
 var password = process.env.OPENSHIFT_MYSQL_DB_PASSWORD || null;
 var config = {
@@ -15,7 +15,7 @@ global.db = {
     Dataitem: sq.import(__dirname + '/dataItem')
 };
 
-global.db.User.hasMany(global.db.Category, {as: "Categories", onDelete: 'cascade'});
+global.db.User.hasMany(global.db.Category, {as: 'Categories', onDelete: 'CASCADE'});
 global.db.Category.hasMany(global.db.Dataitem, {as: "Dataitems", onDelete: 'CASCADE'});
 global.db.Category.belongsTo(global.db.User);
 global.db.Dataitem.belongsTo(global.db.Category);
