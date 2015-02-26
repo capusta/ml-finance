@@ -14,20 +14,20 @@
     </style>
 </head>
 <body>
-<div class="header medium">
+<div class="header low">
     <h1>Code coverage report for <span class="entity">models/user.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">72.22% <small>(13 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">44.44% <small>(8 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">25% <small>(1 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">60% <small>(6 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">40% <small>(4 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">72.22% <small>(13 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">44.44% <small>(8 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -99,24 +99,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,11 +118,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,6 +128,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var crypto = require("crypto");
@@ -151,17 +151,17 @@ module.exports = function(sequelize, DataTypes){
     },
     {
         classMethods: {
-            generateID: function(next){
-                var new_id = pickRandom();
-                global.db.User.find({where: {id: new_id}})
+            generateID: <span class="fstat-no" title="function not covered" >function(next){</span>
+<span class="cstat-no" title="statement not covered" >                var new_id = pickRandom();</span>
+<span class="cstat-no" title="statement not covered" >                global.db.User.find({where: {id: new_id}})</span>
                 .catch(<span class="fstat-no" title="function not covered" >function(err){</span>
 <span class="cstat-no" title="statement not covered" >                    console.log('error in generating new user ID in the model ' + err);</span>
 <span class="cstat-no" title="statement not covered" >                    next(err, null);</span>
                 })
-                .then(function(u){
-                    <span class="missing-if-branch" title="else path not taken" >E</span>if (u === null){
-                        console.log("looks like user " + new_id + " is ok ");
-                        next(null, new_id);
+                .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >                    if (u === null){</span>
+<span class="cstat-no" title="statement not covered" >                        console.log("looks like user " + new_id + " is ok ");</span>
+<span class="cstat-no" title="statement not covered" >                        next(null, new_id);</span>
                     } else {
 <span class="cstat-no" title="statement not covered" >                        global.db.User.generateID(next);</span>
                     }
@@ -180,8 +180,8 @@ module.exports = function(sequelize, DataTypes){
      hooks: {
         beforeDestroy: function(usr, options, callback) {
         usr.getCategories().then(function(cs){
-            cs.forEach(<span class="fstat-no" title="function not covered" >function(i){</span>
-<span class="cstat-no" title="statement not covered" >                i.destroy();</span>
+            cs.forEach(function(i){
+                i.destroy();
             });
             callback(null, usr);
         });
@@ -190,8 +190,8 @@ module.exports = function(sequelize, DataTypes){
     });
 };
 &nbsp;
-function pickRandom () {
-    return crypto.randomBytes(20).toString('hex');
+<span class="fstat-no" title="function not covered" >function pickRandom () {</span>
+<span class="cstat-no" title="statement not covered" >    return crypto.randomBytes(20).toString('hex');</span>
 }
 &nbsp;
 //TODO: INSTANCE METHOD THAT GETS ALL THE ENTRIES</pre></td></tr>
@@ -199,7 +199,7 @@ function pickRandom () {
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 26 2015 03:42:57 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 26 2015 06:16:07 GMT+0000 (UTC)</div>
 </div>
 
 <script src="../prettify.js"></script>

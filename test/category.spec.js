@@ -20,6 +20,7 @@ describe('categoryModel', function(){
         global.db.Category.create({label: "test"}).then(function(cat){
             newCat = cat;
             expect(cat).not.to.be(null);
+            expect(cat).not.to.be.a('undefined');
             done();
         });
     });
@@ -27,7 +28,10 @@ describe('categoryModel', function(){
     it('should add category to user', function(done){
         userModel.create({id: id}).then(function(u){
             u.addCategory(newCat).then(function(){
-                done();
+                u.getCategories().then(function(cats){
+                   expect(cats.length).to.be.equal(1); 
+                   done();
+                });
             });
         });
     });
@@ -53,6 +57,8 @@ describe('categoryModel', function(){
            });
        }); 
     });
+    
+    //TODO: create category and dataitem to see if data item is destroyed when category is destroyed
     
     it('should destroy category and dataitem with user ', function(done){
         userModel.find({where: {id: id}}).then(function(u){

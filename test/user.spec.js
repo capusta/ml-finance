@@ -17,9 +17,15 @@ describe('userModel', function(){
     
     it('should create a new user with ID', function(done){
         newUser = global.db.User.create({id: id}).then(function(u){
+            newUser = u;
             expect(u).not.to.be(null);
             done();
         });
+    });
+    
+    it('should know where to store the JSON data', function(done){
+        expect(newUser.dataDirectory()).not.to.be(null);
+        done();
     });
     
     it('should not create another user with no ID specified', function(done){
