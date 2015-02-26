@@ -10,7 +10,6 @@ module.exports = function(sequelize, DataTypes){
         classMethods: {
             generateID: function(next){
                 var new_id = pickRandom();
-                console.log("generating new id:" + new_id);
                 global.db.User.find({where: {id: new_id}})
                 .catch(function(err){
                     console.log('error in generating new user ID in the model ' + err);
@@ -21,7 +20,7 @@ module.exports = function(sequelize, DataTypes){
                         console.log("looks like user " + new_id + " is ok ");
                         next(null, new_id);
                     } else {
-                        global.db.User.generateID();
+                        global.db.User.generateID(next);
                     }
                       
                 });
@@ -38,7 +37,6 @@ module.exports = function(sequelize, DataTypes){
      hooks: {
         beforeDestroy: function(usr, options, callback) {
         usr.getCategories().then(function(cs){
-            console.log("user cateogires " + cs)
             cs.forEach(function(i){
                 i.destroy();
             });

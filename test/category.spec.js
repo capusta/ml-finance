@@ -7,6 +7,8 @@ var id = 'notRandomID';
 describe('categoryModel', function(){
     var userModel = global.db.User;
     var newCat;
+    var newItem;
+    
     it('should sync the database ', function(done){
         //TODO: move this to a separate test
         global.db.sequelize.sync().then(function(){
@@ -40,10 +42,23 @@ describe('categoryModel', function(){
         done();
     });
     
-    it('should destroy category with user ', function(done){
+    it('should update last entry with new field', function(done){
+       global.db.Dataitem.build().save().then(function(i){
+           newItem = i;
+           newCat.addDataitem(i).then(function(){
+               expect(newCat.updateCategory()).not.to.be(null);
+               expect(newCat.lastEntry).not.to.be(null);
+               expect(newCat.lastEntry).not.to.be.a('undefined');
+               done();
+           });
+       }); 
+    });
+    
+    it('should destroy category and dataitem with user ', function(done){
         userModel.find({where: {id: id}}).then(function(u){
             u.destroy().then(function(){
                 expect(newCat.reload).to.throwError();
+                expect(newItem.reload).to.throwError();
                 done(); 
             });
         });

@@ -7,12 +7,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            defaltValue: 0
         },
         label: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaltValue: "",
+            defaultValue: "",
             validate: {
                 isAlphanumeric: true,
                 len: [1, 140]
@@ -30,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
         hash: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            defaltValue: 0
+            defaultValue: 0
         }
     }, {
         instanceMethods: {
