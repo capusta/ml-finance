@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         label: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "",
+            defaultValue: "na",
             validate: {
                 isAlphanumeric: true,
                 len: [1, 140]
@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         instanceMethods: {
             updateCategory: function() {
-                this.updateAttributes({lastEntry: Sequelize.fn("NOW")}, {fields: ['lastEntry']});
+                this.updateAttributes({lastEntry: new Date()}, {fields: ['lastEntry']});
             }
         }
     }, {

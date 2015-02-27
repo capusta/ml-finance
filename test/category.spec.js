@@ -9,11 +9,10 @@ describe('categoryModel', function(){
     var newCat;
     var newItem;
     
-    it('should sync the database ', function(done){
-        //TODO: move this to a separate test
-        global.db.sequelize.sync().then(function(){
+    before(function(done){
+       global.db.sequelize.sync().then(function(){
             done();
-        });        
+        });  
     });
     
     it('should create category', function(done){
@@ -50,15 +49,29 @@ describe('categoryModel', function(){
        global.db.Dataitem.build().save().then(function(i){
            newItem = i;
            newCat.addDataitem(i).then(function(){
-               expect(newCat.updateCategory()).not.to.be(null);
+               newCat.updateCategory();
                expect(newCat.lastEntry).not.to.be(null);
                expect(newCat.lastEntry).not.to.be.a('undefined');
+               var modelDate = new Date(newCat.lastEntry);
+               var nowDate = new Date();
+               expect(modelDate.getUTCDate()).to.equal(nowDate.getUTCDate());
+               expect(modelDate.getUTCHours()).to.equal(nowDate.getUTCHours());
+               expect(modelDate.getUTCMinutes()).to.equal(nowDate.getUTCMinutes());
                done();
            });
        }); 
     });
     
-    //TODO: create category and dataitem to see if data item is destroyed when category is destroyed
+    it('should create and empty category', function(done){
+        global.db.Category.create().then(function(c){
+            c.destroy().then(function(){
+                done();
+            });
+        })
+        .catch(function(err){
+            console.log(JSON.stringify(err));
+        });
+    });
     
     it('should destroy category and dataitem with user ', function(done){
         userModel.find({where: {id: id}}).then(function(u){
