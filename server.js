@@ -29,7 +29,7 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000);
 app.set('addr',  process.env.IP || process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
 
 http.createServer(app).listen(app.get('port'), app.get('addr'), function(){
-  console.log("Listening on", app.get('port') + ":" + app.get('port'));
+  console.log("Listening on", app.get('addr') + ":" + app.get('port'));
   console.log("starting database services");
   require('./models');
   global.db.sequelize.sync().catch(function(err){
@@ -38,3 +38,8 @@ http.createServer(app).listen(app.get('port'), app.get('addr'), function(){
     console.log('db synchronization succeeded');
   });
 });
+
+if(process.env['NODE_ENV'] === 'test'){
+  console.log("test env \n" );
+  module.exports.app = app;
+}

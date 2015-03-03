@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for workspace/router/user.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <link rel="stylesheet" href="../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">workspace/router/user.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">27.59% <small>(8 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">9.09% <small>(1 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">27.59% <small>(8 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">workspace/router/</a> &#187; user.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">console.log("--loading user routes");
+var md = require('./middleware');
+&nbsp;
+module.exports = function(app){
+    app.get('/user/logout', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >        req.session.destroy(<span class="fstat-no" title="function not covered" >function(err){</span></span>
+<span class="cstat-no" title="statement not covered" >           if(err){</span>
+<span class="cstat-no" title="statement not covered" >               res.render('pages/user', {userid: null, msg: "unable to log out lolz "});</span>
+           } else {
+<span class="cstat-no" title="statement not covered" >               res.render('pages/user', {userid: null, msg: "successfully logged out"});</span>
+           }
+        });
+    });
+    
+    app.get('/data', md.checkuser, <span class="fstat-no" title="function not covered" >function (req, res) {</span>
+<span class="cstat-no" title="statement not covered" >        res.render('pages/user', {userid: req.session.userid, style: 'data'});</span>
+    });
+    
+    app.post('/user/new', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+        //maybe in the future we can use a captcha or something to make sure we do not have too many requests
+        //for now, lets just create a user
+<span class="cstat-no" title="statement not covered" >        var nU = global.db.User;</span>
+<span class="cstat-no" title="statement not covered" >        nU.generateID(<span class="fstat-no" title="function not covered" >function(err, new_id){</span></span>
+<span class="cstat-no" title="statement not covered" >            if(err){</span>
+<span class="cstat-no" title="statement not covered" >                console.log("unable to create user: " + err);</span>
+<span class="cstat-no" title="statement not covered" >                res.json({msg: "Seems like there is an error generating random IDs: " + err});</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                nU.create({id: new_id})</span>
+                .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >               console.log("new user created: " + u.id);</span>
+<span class="cstat-no" title="statement not covered" >               res.json(({userid: u.id, msg: "New ID successfully created"}));</span>
+                });
+            }
+        });
+    });
+    app.get('/user', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >        res.render('pages/index', {msg: "Unable to find your user ID"});</span>
+    });
+    
+    app.get('/user/:userid', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+        //TODO: sanitize the userid param to a string
+        
+<span class="cstat-no" title="statement not covered" >        global.db.User.find({where: {id: req.param('userid')}})</span>
+        .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >            if (u){</span>
+<span class="cstat-no" title="statement not covered" >                req.session.userid = u.id;</span>
+<span class="cstat-no" title="statement not covered" >                req.user = u;</span>
+<span class="cstat-no" title="statement not covered" >                res.render('pages/user', {userid: u.id});</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                res.render('pages/user', {userid: null, msg: "Unable to find your user ID"});</span>
+            }
+        })
+        .catch(<span class="fstat-no" title="function not covered" >function(err){</span>
+<span class="cstat-no" title="statement not covered" >            res.render('pages/user', {userid: null, msg: "An error occured while looking for user ID"});</span>
+        });
+    });
+};</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 03 2015 07:36:42 GMT+0000 (UTC)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for workspace/server.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">workspace/server.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">96% <small>(24 / 25)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">37.5% <small>(3 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">66.67% <small>(2 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">96% <small>(24 / 25)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">workspace/</a> &#187; server.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var http = require('http');
+var path = require('path');
+var express = require('express');
+var session = require('express-session');
+var bodyParser = require("body-parser");
+&nbsp;
+var app = express();
+&nbsp;
+app.use(session({
+  secret: process.env['COOKIE_SECRET'],
+  resave: true,
+  saveUninitialized: false,
+  key: 'ML',
+  secure: true,
+  httpOnly: true
+}));
+&nbsp;
+app.use(express.static(path.resolve(__dirname, 'public')));
+app.set('views', path.resolve((__dirname, 'views')));
+app.set('view engine', 'ejs');
+&nbsp;
+&nbsp;
+app.use(bodyParser.urlencoded({extended: false, limit: '400kb'}));
+app.use(bodyParser.json({limit: '300kb'}));
+&nbsp;
+require('./router')(app);
+&nbsp;
+app.set('port', process.env.PORT || <span class="branch-1 cbranch-no" title="branch not covered" >process.env.OPENSHIFT_NODEJS_PORT </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >3000)</span>;
+app.set('addr',  process.env.IP || <span class="branch-1 cbranch-no" title="branch not covered" >process.env.OPENSHIFT_NODEJS_IP </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >"0.0.0.0")</span>;
+&nbsp;
+http.createServer(app).listen(app.get('port'), app.get('addr'), function(){
+  console.log("Listening on", app.get('addr') + ":" + app.get('port'));
+  console.log("starting database services");
+  require('./models');
+  global.db.sequelize.sync().catch(<span class="fstat-no" title="function not covered" >function(err){</span>
+<span class="cstat-no" title="statement not covered" >    console.log('db synchronization failed ' + err);</span>
+  }).then(function(){
+    console.log('db synchronization succeeded');
+  });
+});
+&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>if(process.env['NODE_ENV'] === 'test'){
+  console.log("test env \n" );
+  module.exports.app = app;
+}</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 03 2015 07:36:42 GMT+0000 (UTC)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

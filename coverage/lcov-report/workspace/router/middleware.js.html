@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for workspace/router/middleware.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <link rel="stylesheet" href="../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">workspace/router/middleware.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">20% <small>(10 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">20% <small>(10 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">workspace/router/</a> &#187; middleware.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">console.log("--loading middleware");
+var async = require("async");
+&nbsp;
+var checkuser = <span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+<span class="cstat-no" title="statement not covered" >    if((typeof req.session.userid === 'undefined') || req.session.userid === null){</span>
+<span class="cstat-no" title="statement not covered" >        return res.render('pages/user', {msg: "Unable to find your user ID"});</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (req.user &amp;&amp; (req.user.id === req.session.userid)){</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        global.db.User.find({where: {id: req.session.userid}})</span>
+        .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >            if (u){</span>
+<span class="cstat-no" title="statement not covered" >                req.user = u;</span>
+<span class="cstat-no" title="statement not covered" >                next();</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                return res.render('pages/user', {userid: null, msg: "Unable to find your user ID"});</span>
+            }
+         });
+     }
+};
+&nbsp;
+var getCategories = <span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+    // make sure that checkuser is run before any other code
+<span class="cstat-no" title="statement not covered" >    if((typeof req.user === 'undefined') || req.user === null){</span>
+<span class="cstat-no" title="statement not covered" >        return res.render('pages/user', {userid: null, msg: "Unable to find your user ID"});</span>
+    }
+<span class="cstat-no" title="statement not covered" >    req.user.getCategories().then(<span class="fstat-no" title="function not covered" >function(categories){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(categories === [] || categories === null){</span>
+<span class="cstat-no" title="statement not covered" >            return res.render('pages/user', {userid: req.session.userid, msg: "Unable to find your categories"});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            var ctgs = [];</span>
+<span class="cstat-no" title="statement not covered" >            categories.forEach(<span class="fstat-no" title="function not covered" >function(c){</span></span>
+<span class="cstat-no" title="statement not covered" >                ctgs.push([c.id, c.label]);</span>
+<span class="cstat-no" title="statement not covered" >                req.categories = ctgs;</span>
+            });
+<span class="cstat-no" title="statement not covered" >                next();</span>
+            }
+        });
+    };
+&nbsp;
+var findcategoryObjects = <span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+<span class="cstat-no" title="statement not covered" >    global.db.User.find({where: {id: req.session.userid}})</span>
+    .then(<span class="fstat-no" title="function not covered" >function(u){</span>
+<span class="cstat-no" title="statement not covered" >        if (u){</span>
+<span class="cstat-no" title="statement not covered" >            req.user = u;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.render('pages/user', {userid: null, msg: "Unable to find your user ID"});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        u.getCategories().complete(<span class="fstat-no" title="function not covered" >function(err, categories){</span></span>
+<span class="cstat-no" title="statement not covered" >            if(err){</span>
+<span class="cstat-no" title="statement not covered" >                res.render('pages/user', {userid: null, msg: "Unable to find your categories"});</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                req.categories = categories;</span>
+<span class="cstat-no" title="statement not covered" >                next();</span>
+            }
+        });
+    });
+};
+&nbsp;
+var findEntries = <span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+<span class="cstat-no" title="statement not covered" >    var items = [];</span>
+<span class="cstat-no" title="statement not covered" >    var getDataItems = <span class="fstat-no" title="function not covered" >function(category, callback){</span></span>
+<span class="cstat-no" title="statement not covered" >        category.getDataitems().complete(<span class="fstat-no" title="function not covered" >function(err, dataitems){</span></span>
+<span class="cstat-no" title="statement not covered" >            dataitems.forEach(<span class="fstat-no" title="function not covered" >function(i){</span></span>
+<span class="cstat-no" title="statement not covered" >                i.category = category.label;</span>
+                
+<span class="cstat-no" title="statement not covered" >                items.push(i);</span>
+            });
+<span class="cstat-no" title="statement not covered" >            callback(null, dataitems.length);</span>
+        });
+       };
+       
+<span class="cstat-no" title="statement not covered" >   async.map(req.categories, getDataItems, <span class="fstat-no" title="function not covered" >function(err, results){</span></span>
+<span class="cstat-no" title="statement not covered" >           if(err) {</span>
+<span class="cstat-no" title="statement not covered" >               res.render('pages/user', {userid: null, msg: "OOPS, could not get all the items"});</span>
+           } else {
+<span class="cstat-no" title="statement not covered" >               req.items = items;</span>
+<span class="cstat-no" title="statement not covered" >               next();</span>
+           }
+       });
+};
+&nbsp;
+module.exports.findEntries = findEntries;
+module.exports.checkuser = checkuser;
+module.exports.getCategories = getCategories;
+module.exports.findcategoryObjects = findcategoryObjects;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 03 2015 07:36:42 GMT+0000 (UTC)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../../sorter.js"></script>
+</body>
+</html>
