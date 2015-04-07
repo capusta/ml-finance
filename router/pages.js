@@ -6,7 +6,7 @@ module.exports = function(app){
         res.render('pages/index');
     });    
     
-    app.get('/test', function(req, res){
+    app.get('/pages/test', function(req, res){
         res.render('pages/test');
     });
 };

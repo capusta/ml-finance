@@ -1,4 +1,5 @@
 var crypto = require("crypto");
+var async = require("async");
 
 module.exports = function(sequelize, DataTypes){
     return sequelize.define("User", {
@@ -30,8 +31,38 @@ module.exports = function(sequelize, DataTypes){
             dataDirectory: function(){
                 return process.env.DATA_DIR || 'data';
             },
-            getDataItems: function(){
-                //TODO: write this function
+            getTrainingData: function(callback){
+                
+                var getItems = function(category, cb){
+                    category.getDataitems().complete(function(err, items){
+                        if(err){
+                            cb(err, null); 
+                            return;
+                        }
+                        var x = {};
+                        x.label = category.label;
+                        x.id = category.id;
+                        x.entries = [];
+                        items.forEach(function(i){
+                            x.entries.push({lat: i.lat, lon: i.lon, temp: i.temp, date: i.date,
+                                amount: i.amount, description: i.description, daysSinceLast: i.daysSinceLast
+                            });
+                        });
+                        cb(null, x);
+                    });
+                };
+                
+                this.getCategories().complete(function(err, categories){
+                    if(err || categories.length === 0){
+                        callback({msg: "No categorires entered"}, null);
+                        return;
+                    } else {
+                        async.map(categories, getItems, function(err, result){
+                            console.log("result it " + JSON.stringify(result));
+                            callback(err, result);
+                        });
+                    }
+                });
             }
         },
      hooks: {

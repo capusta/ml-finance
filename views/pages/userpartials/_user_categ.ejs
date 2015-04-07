@@ -59,7 +59,7 @@ $( document ).ready(function(){
    
   $.ajax({
    type: "POST",
-   url: '/data/categories',
+   url: '/data/categories/new',
    data: {description: d.val().trim() },
    success: d.val(null)
   })

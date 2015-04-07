@@ -1,7 +1,15 @@
 console.log("--loading middleware");
 var async = require("async");
 
+// checkuser middleware will always be called for exception of special cases URLs
+// mostly dealing with setting up and tearing down sessions
+// req.user will always be attached if user has authenticated
+
 var checkuser = function(req, res, next){
+    if(req.path === '/' || req.path.indexOf('pages') >= 0 || req.path.indexOf('user') >= 0){
+        next();
+        return;
+    }
     if((typeof req.session.userid === 'undefined') || req.session.userid === null){
         return res.render('pages/user', {msg: "Unable to find your user ID"});
     }

@@ -12,7 +12,7 @@ module.exports = function(app){
         });
     });
     
-    app.get('/data', md.checkuser, function (req, res) {
+    app.get('/data', function (req, res) {
         res.render('pages/user', {userid: req.session.userid, style: 'data'});
     });
     

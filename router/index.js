@@ -1,4 +1,7 @@
+var md = require('./middleware');
+
 module.exports = function (app) {
+    app.use(md.checkuser);
     require('./train')(app);
     require('./pages')(app);
     require('./user')(app);

@@ -1,77 +1,25 @@
 console.log("--loading categories routes");
-var md = require('./middleware');
-var async = require("async");
-var validator = require("validator")
-
-var errorOut = function(res, msg){
-    res.json({success: false, msg: msg});
-    return null;
-};
+var validator = require("validator");
 
 module.exports = function(app){
-    
-    
-    app.get('/data/entries/view', md.checkuser, md.findcategoryObjects, md.findEntries, function(req, res){
-        //we need sequelize objects instead of a simple array
-       res.render('pages/user', {userid: req.user.id, style: 'dataitems', dataitems: req.items, categories: req.categories});
-    });
-    
-    app.get('/data/categories', md.checkuser, function(req, res){
-        req.user.getCategories().then(function(d){
-            res.render('pages/user', {userid: req.user.id, style: "categories", categories: d});
-        });        
-    });
-    
-    app.get('/data/entries', md.checkuser, md.getCategories, function(req, res) {
-        res.render('pages/user', {userid: req.user.id, style: "dataitems", categories: req.categories});    
-    });
-    
-    app.post('/data/entries', md.checkuser, function(req, res) {
-        if((typeof req.body.category == 'undefined' || req.body.category === null)){
-            return res.json({success: false, msg: "Sorry, please specify category "});
-        }
-        if (!validator.isInt(req.body.category)){
-            return res.json({success: false, msg: "Invalid cateogry"});
-        }
-        req.user.getCategories({where: 'id = ' + req.body.category})
-        .then(function(cat){
-            
-            // This was interesting.  Apparently, sequelize JS will 'find' a record in the database which does not 
-            // exist, and return an empty array instad of follwoing 'function(err, record)' format.
-            // The sure way to find an 'error' is to check that the first element of array does not exist
-            
-            if(cat === [] || cat === null || typeof(cat[0]) === 'undefined'){
-                return res.json({success: false, msg: "Unable to process request "});
-            }
-            console.log("Cateogries " + JSON.stringify(cat[0]));
-            global.db.Dataitem.create({
-                lat: req.body.latitude, 
-                lon: req.body.longitude, 
-                temp: req.body.temp, 
-                amount: req.body.amount, 
-                description: req.body.description
-                })
-            .complete(function(err, d){
-                if(err){
-                    console.log(err);
-                    return res.json({success: false, msg: "Unable to create the item - please make sure all field are filled in "});
-                }
-                
-                d.setDaysSinceLast(cat[0].lastEntry);
-                cat[0].updateCategory();
-                cat[0].addDataitem(d)
-                .then(function(){
-                    return res.json({success: true, msg: "Item added"});
-                })
-                .catch(function(err){
-                    console.log("Unable to add data item for some reason ");
-                    return res.json({success: false, msg: "Error when adding the item "});
-                });
+
+    app.get('/data/categories', function(req, res){
+        if (req.xhr){
+            req.user.getCategories().then(function(categories){
+               var catJson = [];
+               categories.forEach(function(c){
+                   catJson.push({id: c.id, label: c.label});
+               });
+               return res.json(JSON.stringify(catJson)); 
             });
-        });
+        }else {
+            req.user.getCategories().then(function(categories){
+            return res.render('pages/user', {userid: req.user.id, style: "categories", categories: categories});
+            }); 
+        }
     });
     
-    app.post('/data/categories', md.checkuser, function(req, res){
+    app.post('/data/categories/new', function(req, res){
        var desc = req.body.description;
        global.db.Category.create({label: desc})
        .complete(function(err, c){
@@ -85,10 +33,10 @@ module.exports = function(app){
                   res.json({success: true, msg: "Category added", label: c.label});
               }
           });}
-    });
+       });
     });
     
-    app.post('/data/categories/delete/:id', md.checkuser, function(req, res){
+    app.post('/data/categories/delete/:id', function(req, res){
         var cat_id = req.params['id'];
         if(!validator.isInt(cat_id)){
             return res.json({success: false, msg: "Sorry, invalid category"});
@@ -105,6 +53,3 @@ module.exports = function(app){
         
     });
 };
-
-
-
