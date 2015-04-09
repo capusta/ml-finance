@@ -1,19 +1,34 @@
 console.log("--loading entries routes");
-var md = require('./middleware');
 var validator = require("validator");
 
 module.exports = function(app){
-    app.get('/data', function (req, res) {
-        res.render('pages/user', {userid: req.session.userid, style: 'data'});
-    });
-    
-    app.get('/data/entries/view', md.findcategoryObjects, md.findEntries, function(req, res){
+    app.get('/data/entries/view', function(req, res){
         //we need sequelize objects instead of a simple array
-       res.render('pages/user', {userid: req.user.id, style: 'dataitems', dataitems: req.items, categories: req.categories});
+        req.user.getTrainingData(function(err, data){
+            if(err){
+                res.render('pages/user', {userid: req.user.id, msg: "sorry, unable to retrieve all entries"});
+                return;
+            }
+            var categories = [];
+            data.forEach(function(category){
+                categories.push({id: category.id, label: category.label});
+            });
+            res.render('pages/user', {userid: req.user.id, style: 'dataitems', data: data, categories: categories});
+        });
     });
     
-    app.get('/data/entries', md.getCategories, function(req, res) {
-        res.render('pages/user', {userid: req.user.id, style: "dataitems", categories: req.categories || []});    
+    app.get('/data/entries', function(req, res) {
+        var cats = [];
+        req.user.getCategories().complete(function(err, categories){
+            if(err){
+                res.render('pages/user', {userid: req.user.id, msg: "unable to retrieve all categories"});
+                return;
+            }
+            categories.forEach(function(c){
+                cats.push({id: c.id, label: c.label});
+            });
+            res.render('pages/user', {userid: req.user.id, style: "dataitems", categories: cats});    
+        });
     });
     
     app.post('/data/entries', function(req, res) {

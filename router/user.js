@@ -33,6 +33,7 @@ module.exports = function(app){
             }
         });
     });
+    
     app.get('/user', function(req, res){
         res.render('pages/index', {msg: "Unable to find your user ID"});
     });

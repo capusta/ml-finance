@@ -1,12 +1,11 @@
 //let's not pollute the global space
 var training = {};
-
+//s
 training.log = function(text){
   $('#content').prepend(text + "<br>");
 };
 
-
-training.start = function(traindata, iterations){
+training.trainCategories = function(traindata, iterations){
     training.iterations = iterations || 3;
     var opts = {};
     opts.num_epochs = 20;
@@ -70,7 +69,7 @@ training.start = function(traindata, iterations){
             modelData.labelCategories = trainingCategories;
             $.ajax({
                 type: "POST",
-                url: '/train',
+                url: '/train/categories',
                 data: JSON.stringify(modelData),
                 contentType: 'application/json',
                 success: training.log("Server Model Updated."),
@@ -83,5 +82,9 @@ training.start = function(traindata, iterations){
                 training.iterations -= 1;
             }
         }
-};        
+};
+
+training.trainKeywords = function(traindata, iterations){
+
+};
        

@@ -4,23 +4,5 @@
  
 <div class="row">
     <div class="col col-xs-12 col-md-12">
-       <a id="bookmarkme" href="#" rel="sidebar" title="bookmark this page">Bookmark This Page</a>
-    </div>
+       <p>Please set up a few categories if you have not done so - before you add eny data entries. </p>
 </div>
-<script>
-var info = $('#info')
-</script>
-
-<script type="text/javascript">
-    $("#bookmarkme").click(function() {
-      if (window.sidebar) { // Mozilla Firefox Bookmark
-        window.sidebar.addPanel(location.href,document.title,"");
-      } else if(window.external) { // IE Favorite
-        window.external.AddFavorite(location.href,document.title); }
-      else if(window.opera && window.print) { // Opera Hotlist
-        this.title=document.title;
-        return true;
-  }
-});
-
-</script>

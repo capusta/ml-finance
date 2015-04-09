@@ -5,7 +5,7 @@ var async = require('async');
 
 module.exports = function(app){
     
-    app.get('/train', md.checkuser, md.findcategoryObjects, function (req, res) {
+    app.get('/train', md.findcategoryObjects, function (req, res) {
         var trainingData = [];
         var index = 0;
         
@@ -36,7 +36,7 @@ module.exports = function(app){
            });
     });
     
-      app.post('/train', md.checkuser, function(req, res){
+    app.post('/train', function(req, res){
        console.log('posting model for ' + req.session.userid);
        var file = req.user.dataDirectory()+"/"+req.session.userid+'.model';
        jf.writeFile(file, req.body, function(err){

@@ -5,8 +5,8 @@ var md = require('./middleware'),
 
 module.exports = function(app){
     
-    app.get('/predict', md.checkuser, function (req, res) {
-        var path = req.user.dataDirectory()+"/"+req.user.id+".model";
+    app.get('/predict', function (req, res) {
+        var path = req.user.dataDirectory()+"/"+req.user.id+".catmodel";
         fs.exists(path, function(exists){
             if(exists){
                 jf.readFile(path, function(err, m){
