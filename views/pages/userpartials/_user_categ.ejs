@@ -10,40 +10,39 @@
 
 <div id="categoryList">
  <% if (categories == null || categories == []){ %>
-        You do not have any categories defined
-        <% } else { %>
-        <br>
-        <% categories.map(function(c){ %>
-        <div class="row" id="row<%=c.id%>">
-          <div class="col-xs-2">
-           <%= c.label %> 
-          </div>
-          <div class="col-xs-6">
-           <a href=#><span class="glyphicon glyphicon-minus" aria-hidden="true" id="c<%=c.id%>"></span></a>
-          </div>
-          <br>
-          <br>
-         </div>
-         
-         <script>
-         //TODO: make nice tiles or something with flexbox
-          $('#c<%=c.id%>').click(function(){
-           console.log("removing "+ <%= c.id %>)
-           var data = {id: <%= c.id %>};
-           var url = '/data/categories/delete/<%=c.id%>';
-           var posting = $.post(url,data);
-           posting.done(function(data){
-            if (data.msg){
-             log(data.msg)
-            }
-           }).fail(function(){
-            log('failure')
-           })
-           $('#row<%=c.id%>').fadeOut();
-          })
-         </script>
-         <% }) %>
-        <% } %>
+ You do not have any categories defined
+ <% } else { %>
+ <br>
+ <% categories.map(function(c){ %>
+ <div class="row" id="row<%=c.id%>">
+  <div class="col-xs-2">
+   <%= c.label %> 
+   </div>
+   <div class="col-xs-6">
+    <a href=#><span class="glyphicon glyphicon-minus" aria-hidden="true" id="c<%=c.id%>"></span></a>
+    </div>
+    <br>
+    <br>
+    </div>
+    
+    <script>
+    //TODO: make nice tiles or something with flexbox
+    $('#c<%=c.id%>').click(function(){
+     var data = {id: <%= c.id %>};
+     var url = '/data/categories/delete/<%=c.id%>';
+     var posting = $.post(url,data);
+     posting.done(function(data){
+      if (data.msg){
+       log(data.msg)
+      }})
+      .fail(function(){
+       log('failure');
+      })
+      $('#row<%=c.id%>').fadeOut();
+    })
+    </script>
+    <% }) %>
+    <% } %>
 </div>
  
 <script>

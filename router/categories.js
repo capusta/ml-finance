@@ -20,20 +20,24 @@ module.exports = function(app){
     });
     
     app.post('/data/categories/new', function(req, res){
-       var desc = req.body.description;
-       global.db.Category.create({label: desc})
-       .complete(function(err, c){
-          if(err){
-              res.json({success: false, msg: "Sorry, category must be letter+number combination, and less than 140 characters"});
-          } else {
-              req.user.addCategory(c).complete(function(err, next){
-              if (err){
-                  res.json({success: false, msg: "Sorry, there has been a database error of some sort"});
-              } else {
-                  res.json({success: true, msg: "Category added", label: c.label});
-              }
-          });}
-       });
+        if(!req.body.description){
+            return res.json({success: false, msg:"Invalid category description found"});
+        }
+        //sanitizing the actual user input
+        var desc = validator.toString(req.body.description);
+        global.db.Category.create({label: desc})
+        .complete(function(err, c){
+            if(err){
+                res.json({success: false, msg: "Sorry, category must be letter+number combination, and less than 140 characters"});
+            } else {
+                req.user.addCategory(c).complete(function(err, next){
+                    if (err){
+                        res.json({success: false, msg: "Sorry, there has been a database error of some sort"});
+                    } else {
+                        res.json({success: true, msg: "Category added", label: c.label});
+                    }
+                });
+            }});
     });
     
     app.post('/data/categories/delete/:id', function(req, res){
