@@ -92,4 +92,4 @@ var findEntries = function(req, res, next){
 // module.exports.findEntries = findEntries;
 module.exports.checkuser = checkuser;
 // module.exports.getCategories = getCategories;
-module.exports.findcategoryObjects = findcategoryObjects;
+// module.exports.findcategoryObjects = findcategoryObjects;

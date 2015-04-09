@@ -58,7 +58,6 @@ module.exports = function(sequelize, DataTypes){
                         return;
                     } else {
                         async.map(categories, getItems, function(err, result){
-                            console.log("result it " + JSON.stringify(result));
                             callback(err, result);
                         });
                     }
