@@ -19,6 +19,7 @@ module.exports = function(app){
        jf.writeFile(file, req.body, function(err){
            if(err) {
                console.log(err);
+               return res.json({success: false, msg: "Error occured when saving model on server"});
            }
            return res.json({success: true, msg: "Model saved on server"});
        });

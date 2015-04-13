@@ -32,7 +32,7 @@ training.keyhash.reset = function(){
 //
 //***
 
-training.trainCategories = function(traindata, iterations){
+training.trainCategories = function(traindata, iterations, cb){
     training.iterations = iterations || 3;
     var opts = {};
     opts.num_epochs = 20;
@@ -58,7 +58,7 @@ training.trainCategories = function(traindata, iterations){
                 item.temp, 
                 0,
                 date.getUTCMonth()+1, 
-                date.getUTCDay(), 
+                date.getUTCDate(), 
                 date.getUTCHours(), 
                 date.getUTCMinutes()]));
         });
@@ -106,11 +106,11 @@ training.trainCategories = function(traindata, iterations){
                 url: '/train/categories',
                 data: JSON.stringify(modelData),
                 contentType: 'application/json',
-                success: training.log("Server Model Updated."),
                 dataType: "json"
             })
             .done(function(r){
                 training.log(r.msg);
+                cb();
             });
             } else {
                 training.iterations -= 1;
@@ -119,6 +119,6 @@ training.trainCategories = function(traindata, iterations){
 };
 
 training.trainKeywords = function(traindata, iterations){
-
+    training.log("training descriptive keywords");
 };
        

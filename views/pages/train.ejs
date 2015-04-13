@@ -21,8 +21,10 @@
         <script>
             $(document).ready(function(){
                 if((typeof <%- trainingData %> !== 'undefined') && (<%- trainingData %> !== [])){
-                 training.trainCategories(<%- trainingData %>, 3);
-                 training.trainKeywords(<%- trainingData %>,3 );
+                 training.trainCategories(<%- trainingData %>, 3, function(){
+                     training.trainKeywords(<%- trainingData %>,3 );
+                 });
+                 
                 } else {
                     training.log("Oops .. .can't train because we do not have the training data ");
                 }

@@ -58,6 +58,9 @@ var makeGuess = function(){
     predict.log("from data: " + predict.data + " ");
     
     var predicted_label_soft = magicNet.predict_soft(test_vol);
+    
+    predict.log("actual values of prediction: ");
+    predict.log(JSON.stringify(predicted_label_soft.w));
     var predicted_label = magicNet.predict(test_vol);   
     
     // predict.log("categories: " + JSON.stringify(model.labelCategories));
