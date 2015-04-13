@@ -5,6 +5,27 @@ training.log = function(text){
   $('#content').prepend(text + "<br>");
 };
 
+// ***
+// Handles all instances of data we need to remember to pull out
+// the labels of the data we have trained, since trained data is
+// in the format int 0..K
+// ***
+training.keywords = {};
+training.keyhash = {};
+training.keyhash.index = 0;
+
+training.keyhash.add = function(label){
+    if(!training.keywords[label]){
+        training.keywords[label] = training.keyhash.index;
+        training.keyhash.index++;
+    }
+};
+
+training.keyhash.reset = function(){
+    training.keywords = {};
+    training.keyhash.index = 0;
+};
+
 //***
 //
 // Will train categories data based on various factors
@@ -24,9 +45,10 @@ training.trainCategories = function(traindata, iterations){
     var trainingCategories = [];
     
     traindata.forEach(function(cat, index){
+        //Labels must correspond to their indexes
+        trainingCategories.push(cat.label);
+        
         cat.entries.forEach(function(item){
-            //Labels must correspond to their indexes
-            trainingCategories.push(cat.label);
             net_train_labels.push(index);
             // all dates in the database should be UTC format
              var date = new Date(item.date);
@@ -34,11 +56,11 @@ training.trainCategories = function(traindata, iterations){
                 item.lat, 
                 item.lon, 
                 item.temp, 
-                item.daysSinceLast,
-                date.getMonth()+1, 
-                date.getDay(), 
-                date.getHours(), 
-                date.getMinutes()]));
+                0,
+                date.getUTCMonth()+1, 
+                date.getUTCDay(), 
+                date.getUTCHours(), 
+                date.getUTCMinutes()]));
         });
     });
     

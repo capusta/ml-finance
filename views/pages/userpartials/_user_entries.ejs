@@ -48,12 +48,12 @@
    <% data.forEach(function(category){ %>
     
      <% category.entries.forEach(function(e){ %>
-     <div class="row">
+     <div class="row-fluid">
       <div class="col col-xs-2 col-md-1 hidden-xs"><%= e.lat %></div>
       <div class="col col-xs-2 col-md-1 hidden-xs"><%= e.lon %></div>
-      <div class="col col-xs-2 col-md-1 hidden-xs"><%= (e.date.getMonth())+1 %>/ <%= e.date.getDay() %></div>
+      <div class="col col-xs-2 col-md-1 hidden-xs"><%= (e.date.getUTCMonth())+1 %>/<%= e.date.getUTCDate() %>-<%= e.date.getUTCHours() %>:<%= e.date.getUTCMinutes() %></div>
       <div class="col col-xs-2 col-md-1"><%= e.amount %></div>
-      <div class="col col-xs-2 col-md-3 "><%= e.description %></div>
+      <div class="col col-xs-6 col-md-3 "><%= e.description %></div>
       <div class="col col-xs-2 col-md-2"><%= category.label %></div>
       <br>
       </div>

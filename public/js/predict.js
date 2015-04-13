@@ -40,10 +40,10 @@ predict.datetime = function(pos){
     var date = new Date(pos.timestamp);
     predict.log("Date: " + date);
     
-    // TODO: daysSinceLast variable - for all categories, and get the highest rating
+    // TODO: daysSinceLast variable (below) - for all categories, and get the highest rating
     predict.data.push(0);
     predict.data.push(date.getUTCMonth()+1); 
-    predict.data.push(date.getUTCDay()); 
+    predict.data.push(date.getUTCDate()); 
     predict.data.push(date.getUTCHours()); 
     predict.data.push(date.getUTCMinutes());
     makeGuess();
