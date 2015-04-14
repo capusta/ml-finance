@@ -21,6 +21,10 @@ training.keyhash.add = function(label){
     }
 };
 
+training.keyhash.get = function(label){
+    return training.keywords[label];
+};
+
 training.keyhash.reset = function(){
     training.keywords = {};
     training.keyhash.index = 0;
@@ -119,6 +123,25 @@ training.trainCategories = function(traindata, iterations, cb){
 };
 
 training.trainKeywords = function(traindata, iterations){
+    var net_train_labels = [];
+    var net_train_data = [];
+    
     training.log("training descriptive keywords");
+    // oh yea, we're gonna do this shit ... 
+    
+    //let's reset whatever data
+    training.keyhash.reset();
+    
+    //iterate thru all categories
+    traindata.forEach(function(c){
+       c.entries.forEach(function(items){
+          items.description.split(" ").forEach(function(w){
+            // we now caputured every word in the description field
+            training.log("training: " + w);
+            //todo: make traiing Vols
+          });
+       }); 
+    });
+    
 };
        
